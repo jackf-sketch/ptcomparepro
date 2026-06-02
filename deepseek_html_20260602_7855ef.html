@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Compare physical therapy costs near you. Real insurance vs cash prices, patient reviews, and availability."/>
+<meta property="og:title" content="PTCompare Pro — Compare PT Costs"/>
+<meta property="og:description" content="See what physical therapy actually costs before you book. Insurance vs cash estimates, real patient price reports."/>
+<title>PTCompare Pro — Compare Physical Therapy Costs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --nv:#0A192F;--nv2:#112240;--nv3:#1d3461;
+  --teal:#0D9488;--teal-lt:#CCFBF1;--teal-dk:#0f766e;
+  --sky:#0284c7;--bg:#f8fafc;--card:#fff;
+  --tx:#0f172a;--mu:#64748b;--bd:#e2e8f0;
+  --sh:0 2px 12px rgba(10,25,47,.08);
+  --shl:0 8px 32px rgba(10,25,47,.12);
+  --amber:#f59e0b;--red:#ef4444;--green:#10b981;--purple:#7c3aed;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;line-height:1.6;font-size:15px}
+.D{font-family:'Fraunces',serif}
+/* SKELETON LOADERS */
+.skeleton{background:linear-gradient(90deg,#e5e7eb 25%,#f3f4f6 50%,#e5e7eb 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.skel-row{display:flex;gap:.8rem;padding:1rem;margin-bottom:.5rem}
+.skel-avatar{width:40px;height:40px;border-radius:50%;flex-shrink:0}
+.skel-lines{flex:1;display:flex;flex-direction:column;gap:.5rem}
+.skel-line{height:12px;border-radius:4px}
+.skel-line.short{width:60%}
+#nav{background:var(--nv);position:sticky;top:0;z-index:900;border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-i{display:flex;align-items:center;justify-content:space-between;gap:.75rem;height:56px;padding:0 1.5rem;width:100%;max-width:1400px;margin:0 auto}
+.logo{font-family:'Fraunces',serif;font-weight:700;font-size:1.3rem;color:#fff;cursor:pointer;letter-spacing:-.02em;flex-shrink:0}
+.logo span{color:#2dd4bf}
+.nav-links{display:flex;gap:.05rem;align-items:center;overflow-x:auto}
+.nav-links::-webkit-scrollbar{height:0}
+.nl{background:none;border:none;color:rgba(255,255,255,.65);font-family:'DM Sans',sans-serif;font-weight:500;font-size:.82rem;padding:.4rem .8rem;border-radius:7px;cursor:pointer;transition:all .18s;white-space:nowrap}
+.nl:hover{color:#fff;background:rgba(255,255,255,.08)}
+.nl.on{color:#fff;background:rgba(255,255,255,.1);font-weight:600}
+.nav-r{display:flex;align-items:center;gap:.4rem;flex-shrink:0}
+.btn-li{background:transparent;border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.82);font-family:'DM Sans',sans-serif;font-weight:500;font-size:.8rem;padding:.38rem .9rem;border-radius:7px;cursor:pointer;transition:all .18s}
+.btn-li:hover{border-color:rgba(255,255,255,.5);color:#fff}
+.btn-su{background:var(--teal);border:none;color:#fff;font-weight:600;font-size:.8rem;padding:.4rem 1rem;border-radius:7px;cursor:pointer;transition:all .18s;font-family:'DM Sans',sans-serif}
+.btn-su:hover{background:var(--teal-dk)}
+.u-pill{display:flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:.25rem .6rem .25rem .3rem;cursor:pointer}
+.u-pill:hover{background:rgba(255,255,255,.14)}
+.u-dot{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--teal),#2dd4bf);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.7rem}
+#hero{background:linear-gradient(160deg,var(--nv) 0%,var(--nv2) 55%,#153e6b 100%);padding:3rem 1.5rem 2rem;position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(13,148,136,.12),transparent 65%);border-radius:50%;pointer-events:none}
+.hero-inner{max-width:750px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.hero-inner h1{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(1.7rem,3.5vw,2.6rem);color:#fff;line-height:1.15;letter-spacing:-.03em;margin-bottom:.6rem}
+.hero-inner h1 em{color:#2dd4bf;font-style:italic}
+.hero-inner p{color:rgba(255,255,255,.68);font-size:.92rem;margin-bottom:1.4rem;line-height:1.6;max-width:560px;margin-left:auto;margin-right:auto}
+.sbar{display:flex;gap:.45rem;max-width:600px;margin:0 auto .8rem}
+.sbar input{flex:1;padding:.72rem 1.1rem;border:2px solid transparent;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:.94rem;outline:none;transition:border .18s;background:#fff}
+.sbar input:focus{border-color:var(--teal)}
+.sbar input::placeholder{color:#94a3b8}
+.btn-go{background:var(--teal);color:#fff;border:none;padding:.72rem 1.4rem;border-radius:9px;font-family:'Fraunces',serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .15s;white-space:nowrap}
+.btn-go:hover{background:var(--teal-dk);transform:translateY(-1px)}
+.btn-nm{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);color:#fff;padding:.72rem 1.1rem;border-radius:9px;font-weight:600;font-size:.82rem;cursor:pointer;transition:all .15s;white-space:nowrap;font-family:'DM Sans',sans-serif}
+.btn-nm:hover{background:rgba(255,255,255,.2)}
+.rad-row{display:flex;justify-content:center;align-items:center;gap:.5rem}
+.rad-row label{color:rgba(255,255,255,.5);font-size:.75rem}
+.rad-row select{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;padding:.25rem .55rem;border-radius:6px;font-size:.75rem;cursor:pointer;outline:none;font-family:'DM Sans',sans-serif}
+#stat-bar{background:var(--nv2);border-top:1px solid rgba(255,255,255,.06);padding:.5rem 1.5rem}
+.stat-i{display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+.stat-it{display:flex;align-items:center;gap:.35rem;font-size:.74rem;color:rgba(255,255,255,.5)}
+.stat-it b{color:#fff}
+.ldot{width:6px;height:6px;background:var(--teal);border-radius:50%;display:inline-block;animation:ldot 1.6s ease infinite;flex-shrink:0}
+@keyframes ldot{0%,100%{opacity:1}50%{opacity:.3}}
+.panel{display:none}.panel.on{display:block}
+.app-grid{display:grid;grid-template-columns:330px 1fr;gap:0;min-height:calc(100vh - 56px);width:100%}
+.sidebar{background:var(--bg);border-right:1px solid var(--bd);padding:1rem;overflow-y:auto;position:sticky;top:56px;height:calc(100vh - 56px)}
+.results-col{padding:1rem 1.25rem;overflow-y:auto}
+#map-wrap{border-radius:11px;overflow:hidden;box-shadow:var(--shl);border:1px solid var(--bd);margin-bottom:1rem;position:relative}
+#gmap{height:280px;width:100%;min-height:280px;background:#e5e7eb}
+.map-expand-btn{position:absolute;top:.5rem;right:.5rem;z-index:10;background:var(--card);border:1px solid var(--bd);border-radius:5px;padding:.3rem .55rem;font-size:.7rem;font-weight:600;cursor:pointer;box-shadow:var(--sh);font-family:'DM Sans',sans-serif;color:var(--nv)}
+.map-expand-btn:hover{background:var(--nv);color:#fff}
+.fpanel{background:var(--card);border-radius:11px;padding:1.1rem;box-shadow:var(--sh);border:1px solid var(--bd)}
+.fsec{font-family:'Fraunces',serif;font-weight:700;font-size:.85rem;color:var(--nv);margin-bottom:.75rem;display:flex;align-items:center;gap:.35rem}
+.flbl{display:block;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--mu);margin-bottom:.3rem;margin-top:.55rem}
+.fsel{width:100%;padding:.45rem .7rem;border-radius:7px;border:1.5px solid var(--bd);font-family:'DM Sans',sans-serif;font-size:.82rem;background:var(--bg);cursor:pointer;outline:none;transition:border .15s;color:var(--tx)}
+.fsel:focus{border-color:var(--teal)}
+.slide-container{position:relative;margin-top:1.3rem;margin-bottom:.15rem}
+.slide-val-bubble{position:absolute;top:-1.4rem;left:50%;transform:translateX(-50%);background:var(--nv);color:#fff;font-size:.66rem;font-weight:600;padding:.15rem .4rem;border-radius:4px;pointer-events:none;white-space:nowrap}
+.slide-val-bubble::after{content:'';position:absolute;bottom:-3px;left:50%;transform:translateX(-50%);border-width:3px 3px 0;border-style:solid;border-color:var(--nv) transparent}
+input[type=range]{width:100%;accent-color:var(--teal);cursor:pointer;display:block}
+.rl{display:flex;justify-content:space-between;font-size:.72rem;color:var(--mu);margin-bottom:.12rem}
+.chip{display:inline-flex;align-items:center;gap:.25rem;padding:.25rem .52rem;border-radius:5px;background:var(--bg);border:1.5px solid var(--bd);font-size:.72rem;font-weight:500;cursor:pointer;transition:all .14s;margin:.12rem}
+.chip input{accent-color:var(--teal);cursor:pointer}
+.chip.on{background:var(--teal-lt);border-color:var(--teal);color:var(--teal-dk)}
+#comply{background:#fffbeb;border:1.5px solid #fde68a;border-radius:7px;padding:.65rem .8rem;display:none;align-items:flex-start;gap:.45rem;font-size:.73rem;color:#92400e;margin-top:.55rem;line-height:1.5}
+#comply.on{display:flex}
+.toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:.8rem;flex-wrap:wrap;gap:.4rem}
+.res-count{font-family:'Fraunces',serif;font-weight:700;font-size:1rem;color:var(--nv)}
+.res-loc{color:var(--mu);font-size:.78rem}
+.sort-sel{font-size:.77rem;padding:.35rem .6rem;border-radius:6px;border:1.5px solid var(--bd);background:var(--card);font-family:'DM Sans',sans-serif;color:var(--tx)}
+@media(max-width:900px){
+  .app-grid{grid-template-columns:1fr}
+  .sidebar{display:none;position:static;height:auto;border-right:none}
+  #gmap{height:200px}
+  .nav-links{gap:0}
+  .nav-i{padding:0 1rem}
+}
+.card{background:var(--card);border-radius:13px;border:1px solid var(--bd);box-shadow:var(--sh);overflow:hidden;transition:box-shadow .2s,transform .18s;margin-bottom:.85rem}
+.card:hover{box-shadow:var(--shl);transform:translateY(-2px)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;padding:1.05rem 1.05rem .55rem}
+.badge{font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.15rem .42rem;border-radius:4px}
+.b-prem{background:var(--teal-lt);color:var(--teal-dk)}
+.b-uncl{background:#fef3c7;color:#92400e}
+.b-veri{background:#dbeafe;color:#1e40af}
+.b-acc{background:#f0fdf4;color:#166534}
+.mtag{font-size:.67rem;padding:.14rem .42rem;border-radius:4px;background:#f0fdf4;color:var(--teal-dk);border:1px solid #99f6e4;font-weight:500}
+.cbar-wrap{padding:.7rem 1.05rem .88rem;border-top:1px solid var(--bd);background:#fafffe}
+.cbar-lbl{display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:.2rem;font-weight:500;align-items:center}
+.cbar-track{height:9px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin-bottom:.42rem}
+.cbar-fill{height:100%;border-radius:999px;transition:width .85s cubic-bezier(.16,1,.3,1)}
+.bar-ins{background:linear-gradient(90deg,#0284c7,#38bdf8)}
+.bar-cash{background:linear-gradient(90deg,var(--teal),#2dd4bf)}
+.save-pill{display:inline-flex;align-items:center;gap:.2rem;background:var(--teal);color:#fff;font-size:.68rem;font-weight:700;padding:.18rem .55rem;border-radius:5px}
+.price-conf{display:inline-flex;align-items:center;gap:.15rem;font-size:.62rem;font-weight:600;padding:.1rem .35rem;border-radius:3px}
+.conf-high{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+.conf-med{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+.conf-low{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.ins-badges{display:flex;flex-wrap:wrap;gap:.2rem;margin-top:.45rem}
+.ins-badge{display:inline-flex;align-items:center;gap:.15rem;padding:.14rem .4rem;border-radius:3px;font-size:.63rem;font-weight:600;background:#f0f9ff;border:1px solid #bae6fd;color:#0369a1}
+.ins-badge.acc{background:#f0fdf4;border-color:#bbf7d0;color:#166534}
+.tele-badge{display:inline-flex;align-items:center;gap:.15rem;padding:.14rem .4rem;border-radius:3px;font-size:.63rem;font-weight:600;background:#faf5ff;border:1px solid #e9d5ff;color:#7c3aed}
+.apt-ind{display:inline-flex;align-items:center;gap:.18rem;font-size:.65rem;font-weight:600;padding:.1rem .35rem;border-radius:3px}
+.apt-avail{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+.apt-wait{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+.acc-badges{display:flex;flex-wrap:wrap;gap:.18rem;margin-top:.3rem}
+.acc-badge{font-size:.6rem;padding:.08rem .3rem;border-radius:3px;background:#f8fafc;border:1px solid var(--bd);color:var(--mu);display:inline-flex;align-items:center;gap:.12rem}
+.compare-table{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:.75rem}
+.compare-table th{background:var(--nv);color:#fff;padding:.5rem .7rem;text-align:left;font-weight:600;font-family:'Fraunces',serif;font-size:.75rem}
+.compare-table td{padding:.45rem .7rem;border-bottom:1px solid var(--bd);font-size:.78rem}
+.compare-table tr:nth-child(even){background:var(--bg)}
+.compare-table tr:hover{background:#f0f9ff}
+.detail-section{margin-bottom:1.1rem}
+.detail-section h4{font-family:'Fraunces',serif;font-weight:700;font-size:.9rem;color:var(--nv);margin-bottom:.4rem}
+.price-report-card{background:linear-gradient(135deg,#fef3c7,#fff7ed);border:1px solid #fde68a;border-radius:9px;padding:.9rem;margin-top:.75rem}
+.btn{background:var(--teal);color:#fff;border:none;padding:.45rem .95rem;border-radius:7px;font-weight:600;font-size:.8rem;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:.25rem;font-family:'DM Sans',sans-serif}
+.btn:hover{background:var(--teal-dk);transform:translateY(-1px)}
+.btn2{background:transparent;color:var(--nv);border:1.5px solid var(--bd);padding:.45rem .9rem;border-radius:7px;font-weight:500;font-size:.8rem;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+.btn2:hover{border-color:var(--nv);background:var(--bg)}
+.btn-sm{padding:.28rem .6rem;font-size:.7rem}
+.spin-wrap{display:flex;flex-direction:column;align-items:center;padding:2rem;gap:.7rem}
+.spin{width:30px;height:30px;border:3px solid var(--bd);border-top-color:var(--teal);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mbg{position:fixed;inset:0;background:rgba(10,25,47,.5);backdrop-filter:blur(3px);z-index:2000;display:none;align-items:center;justify-content:center;padding:1rem}
+.mbg.on{display:flex}
+.modal{background:var(--card);border-radius:14px;padding:1.75rem;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2);position:relative}
+.modal.wide{max-width:700px}
+.mx{position:absolute;top:.85rem;right:.85rem;background:var(--bg);border:none;cursor:pointer;font-size:.9rem;color:var(--mu);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .14s}
+.mx:hover{background:var(--bd)}
+.fi{width:100%;padding:.5rem .75rem;border:1.5px solid var(--bd);border-radius:7px;font-family:'DM Sans',sans-serif;font-size:.84rem;outline:none;transition:border .14s;background:var(--bg);color:var(--tx)}
+.fi:focus{border-color:var(--teal);background:#fff}
+.fl2{font-size:.7rem;font-weight:600;color:var(--nv);display:block;margin-bottom:.24rem;margin-top:.6rem}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
+.tbar{display:flex;border-bottom:2px solid var(--bd);margin-bottom:.95rem}
+.tab{padding:.45rem .85rem;font-size:.8rem;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .14s;color:var(--mu);font-family:'DM Sans',sans-serif}
+.tab.on{color:var(--nv);border-bottom-color:var(--teal);font-weight:600}
+.tp{display:none}.tp.on{display:block}
+.si{display:flex;flex-direction:row-reverse;justify-content:flex-start;gap:.1rem}
+.si input{display:none}
+.si label{font-size:1.4rem;color:#d1d5db;cursor:pointer;transition:color .1s}
+.si input:checked~label,.si label:hover,.si label:hover~label{color:#f59e0b}
+.rc{background:var(--bg);border-radius:8px;padding:.7rem .85rem;border:1px solid var(--bd);margin-bottom:.5rem}
+.rav{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--nv2),var(--teal));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.7rem;flex-shrink:0}
+.welcome-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;box-shadow:var(--shl);padding:2.5rem;max-width:750px;margin:2rem auto;text-align:center}
+.feat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem;text-align:left}
+.feat-box{background:var(--bg);border:1px solid var(--bd);border-radius:9px;padding:1.1rem}
+.step-c{background:var(--card);border-radius:12px;padding:1.3rem;box-shadow:var(--sh);border:1px solid var(--bd);margin-bottom:.8rem}
+.step-n{width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center;margin-bottom:.7rem;flex-shrink:0}
+.val-c{background:var(--card);border-radius:10px;padding:1.1rem;box-shadow:var(--sh);border:1px solid var(--bd)}
+.val-i{width:36px;height:36px;border-radius:8px;background:var(--teal-lt);display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:.55rem}
+.founder-card{max-width:600px;margin:0 auto;background:var(--card);border-radius:14px;padding:2rem;box-shadow:var(--shl);border:2px solid var(--teal-lt);text-align:center}
+.founder-bio{text-align:left;line-height:1.7;margin:1rem 0;font-size:.9rem;color:var(--tx)}
+.mission-box{display:flex;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(135deg,#f0f9ff,#f0fdf4);padding:.9rem 1.3rem;border-radius:9px;margin:1.1rem 0;font-weight:600;font-size:.88rem;color:var(--nv);border:1px solid var(--bd)}
+.feedback-btn{display:inline-block;background:var(--teal);color:#fff;padding:.6rem 1.4rem;border-radius:7px;text-decoration:none;font-weight:600;font-size:.85rem;transition:all .15s;margin-top:.4rem;cursor:pointer}
+.feedback-btn:hover{background:var(--teal-dk)}
+/* PRICING TRANSPARENCY SECTION */
+.pricing-info{background:var(--card);border:1px solid var(--bd);border-radius:11px;padding:1.3rem;margin-top:1.5rem}
+.pricing-info h4{font-family:'Fraunces',serif;font-weight:700;color:var(--nv);margin-bottom:.5rem}
+.pricing-tier{display:flex;align-items:flex-start;gap:.6rem;padding:.7rem 0;border-bottom:1px solid var(--bd)}
+.pricing-tier:last-child{border-bottom:none}
+.pricing-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem}
+.pc{background:linear-gradient(135deg,var(--nv),var(--nv3));border-radius:14px;color:#fff;padding:1.5rem;box-shadow:0 8px 36px rgba(10,25,47,.25);position:relative;overflow:hidden}
+.pc::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(13,148,136,.25),transparent 65%);border-radius:50%;pointer-events:none}
+.pt{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:1rem 1.1rem;transition:all .2s;min-width:160px}
+.pt:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
+.pt.hi{border-color:#2dd4bf;background:rgba(13,148,136,.18)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:2px}
+.tst{position:fixed;top:1rem;right:1rem;background:var(--nv);color:#fff;padding:.65rem 1.1rem;border-radius:8px;font-size:.82rem;font-weight:500;z-index:3000;box-shadow:var(--shl);animation:slideIn .3s ease;max-width:360px}
+.tst.ok{background:var(--teal)}
+.tst.warn{background:var(--amber);color:#0f172a}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+.anote{font-size:.7rem;color:var(--mu);margin-top:.5rem;padding:.45rem .6rem;background:#f8fafc;border-radius:5px;border:1px solid var(--bd);line-height:1.5}
+.empty-s{text-align:center;padding:2.5rem 1rem}
+.err-box{background:#fef2f2;color:#991b1b;padding:.65rem .85rem;border-radius:7px;font-size:.8rem;margin-bottom:.65rem;border:1px solid #fecaca}
+.site-footer{background:var(--nv);color:rgba(255,255,255,.55);border-top:1px solid rgba(255,255,255,.06);font-size:.78rem;padding:1.1rem 1.5rem;margin-top:auto}
+.site-footer-i{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
+.site-footer-brand b{color:#fff;font-family:'Fraunces',serif}
+.site-footer-brand span{color:#2dd4bf}
+.site-footer-links a{color:rgba(255,255,255,.55);text-decoration:none;font-weight:500;transition:color .15s;cursor:pointer}
+.site-footer-links a:hover{color:#2dd4bf}
+.btn-toggle-saved{background:transparent;color:var(--mu);border:1.5px solid var(--bd);font-size:.77rem;padding:.35rem .6rem;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;font-weight:500}
+.btn-toggle-saved.active{background:var(--teal-lt);border-color:var(--teal);color:var(--teal-dk);font-weight:600}
+.compare-btn{background:var(--sky);color:#fff;border:none;padding:.45rem .95rem;border-radius:7px;font-weight:600;font-size:.8rem;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:.25rem;font-family:'DM Sans',sans-serif}
+.compare-btn:hover{background:#0369a1}
+.share-btn{background:var(--purple);color:#fff;border:none;padding:.32rem .65rem;border-radius:6px;font-weight:500;font-size:.72rem;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+.share-btn:hover{opacity:.9}
+.export-btn{background:transparent;color:var(--mu);border:1.5px solid var(--bd);font-size:.77rem;padding:.35rem .6rem;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;font-weight:500}
+.export-btn:hover{border-color:var(--nv);color:var(--nv)}
+#back-top{position:fixed;bottom:1.8rem;right:1.8rem;width:40px;height:40px;border-radius:50%;background:var(--nv);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:none;align-items:center;justify-content:center;z-index:800;box-shadow:var(--shl);transition:all .2s}
+#back-top:hover{background:var(--teal);transform:translateY(-2px)}
+#back-top.visible{display:flex}
+.recent-bar{display:flex;gap:.35rem;flex-wrap:wrap;padding:.55rem 1.25rem;background:var(--bg);border-bottom:1px solid var(--bd);align-items:center;font-size:.73rem;color:var(--mu)}
+.recent-pill{background:var(--card);border:1px solid var(--bd);padding:.16rem .5rem;border-radius:999px;cursor:pointer;font-size:.7rem;transition:all .14s;white-space:nowrap}
+.recent-pill:hover{background:var(--teal-lt);border-color:var(--teal)}
+/* KEYBOARD SHORTCUT HINT */
+.kbd-hint{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);padding:.1rem .4rem;border-radius:3px;font-size:.65rem;margin-left:.3rem;color:rgba(255,255,255,.5)}
+</style>
+</head>
+<body>
+<div id="tb"></div>
+
+<div class="mbg" id="m-auth"><div class="modal" style="max-width:400px"><button class="mx" onclick="cm('m-auth')">✕</button><div class="tbar"><div class="tab on" id="t-li" onclick="atab('login')">Sign In</div><div class="tab" id="t-su" onclick="atab('signup')">Create Account</div></div><div class="tp on" id="p-li"><h3 class="D" style="font-weight:700;font-size:1.1rem;color:var(--nv);margin-bottom:.2rem">Welcome back</h3><p style="font-size:.8rem;color:var(--mu);margin-bottom:.9rem">Sign in to see your tracked clinics and comparisons.</p><label class="fl2">Email</label><input class="fi" id="l-em" type="email" placeholder="you@email.com"/><label class="fl2">Password</label><input class="fi" id="l-pw" type="password" placeholder="••••••••"/><button class="btn" style="width:100%;justify-content:center;margin-top:.8rem;padding:.55rem" onclick="doLogin()">Sign In</button></div><div class="tp" id="p-su"><h3 class="D" style="font-weight:700;font-size:1.1rem;color:var(--nv);margin-bottom:.2rem">Create account</h3><p style="font-size:.8rem;color:var(--mu);margin-bottom:.9rem">Save clinics and get notified about price changes.</p><div class="fg"><div><label class="fl2">First Name</label><input class="fi" id="s-fn" type="text" placeholder="Jane"/></div><div><label class="fl2">Last Name</label><input class="fi" id="s-ln" type="text" placeholder="Smith"/></div></div><label class="fl2">Email</label><input class="fi" id="s-em" type="email" placeholder="you@email.com"/><label class="fl2">Password</label><input class="fi" id="s-pw" type="password" placeholder="Create a password"/><label class="fl2">ZIP Code</label><input class="fi" id="s-zip" type="text" placeholder="98105"/><button class="btn" style="width:100%;justify-content:center;margin-top:.8rem;padding:.55rem" onclick="doSignup()">Create Account</button></div></div></div>
+<div class="mbg" id="m-bk"><div class="modal"><button class="mx" onclick="cm('m-bk')">✕</button><div id="bk-body"></div></div></div>
+<div class="mbg" id="m-rv"><div class="modal" style="max-width:440px"><button class="mx" onclick="cm('m-rv')">✕</button><h3 class="D" style="font-weight:700;font-size:1.05rem;color:var(--nv);margin-bottom:.15rem">Leave a Review</h3><p id="rv-cn" style="font-size:.78rem;color:var(--mu);margin-bottom:.85rem"></p><label class="fl2">Rating</label><div class="si"><input type="radio" name="rv" id="s5" value="5"/><label for="s5">★</label><input type="radio" name="rv" id="s4" value="4"/><label for="s4">★</label><input type="radio" name="rv" id="s3" value="3"/><label for="s3">★</label><input type="radio" name="rv" id="s2" value="2"/><label for="s2">★</label><input type="radio" name="rv" id="s1" value="1"/><label for="s1">★</label></div><label class="fl2">Wait time</label><select class="fi" id="rv-wait"><option>Less than 5 min</option><option>5-15 min</option><option>15-30 min</option><option>Over 30 min</option></select><label class="fl2">Your experience</label><textarea class="fi" id="rv-txt" rows="3" placeholder="What went well? What could be better?" style="resize:vertical"></textarea><label class="fl2">Name</label><input class="fi" id="rv-nm" type="text" placeholder="Jane S. or Anonymous"/><label class="fl2">What did you pay per session?</label><select class="fi" id="rv-pay"><option value="">Select...</option><option value="cash_60_80">Cash — $60-80</option><option value="cash_80_120">Cash — $80-120</option><option value="cash_120_160">Cash — $120-160</option><option value="cash_160_plus">Cash — $160+</option><option value="copay_15_30">Copay — $15-30</option><option value="copay_30_50">Copay — $30-50</option><option value="copay_50_plus">Copay — $50+</option><option value="deductible">Toward deductible</option><option value="prefer_not">Prefer not to say</option></select><button class="btn" style="width:100%;justify-content:center;margin-top:.8rem;padding:.55rem" onclick="subRev()">Submit</button></div></div>
+<div class="mbg" id="m-price"><div class="modal" style="max-width:440px"><button class="mx" onclick="cm('m-price')">✕</button><h3 class="D" style="font-weight:700;font-size:1.05rem;color:var(--nv);margin-bottom:.15rem">💰 Report What You Paid</h3><p id="pr-cn" style="font-size:.78rem;color:var(--mu);margin-bottom:.8rem"></p><p style="font-size:.76rem;color:var(--mu);margin-bottom:.75rem;background:#fef3c7;padding:.5rem .65rem;border-radius:7px;line-height:1.5">Every report helps improve cost estimates for other patients. Completely anonymous.</p><label class="fl2">Amount per session</label><input class="fi" id="pr-amt" type="number" placeholder="$" min="20" max="500"/><label class="fl2">Payment type</label><select class="fi" id="pr-type"><option>Cash / Self-Pay</option><option>Insurance Copay</option><option>Applied to Deductible</option><option>Coinsurance</option></select><label class="fl2">Insurance (if any)</label><select class="fi" id="pr-ins"><option value="">N/A — Cash pay</option><option value="aetna">Aetna</option><option value="bcbs">Blue Cross Blue Shield</option><option value="cigna">Cigna</option><option value="uhc">UnitedHealthcare</option><option value="medicare">Medicare</option><option value="humana">Humana</option><option value="other">Other</option></select><label class="fl2">Date of visit</label><input class="fi" id="pr-date" type="month"/><button class="btn" style="width:100%;justify-content:center;margin-top:.8rem;padding:.55rem" onclick="subPrice()">Submit Report</button></div></div>
+<div class="mbg" id="m-detail"><div class="modal wide"><button class="mx" onclick="cm('m-detail')">✕</button><div id="detail-body"></div></div></div>
+<div class="mbg" id="m-compare"><div class="modal" style="max-width:820px"><button class="mx" onclick="cm('m-compare')">✕</button><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem"><h3 class="D" style="font-weight:700;font-size:1.1rem;color:var(--nv)">📊 Compare Tracked Clinics</h3><button class="export-btn" onclick="exportCompare()">🖨 Print</button></div><div id="compare-body"><p style="font-size:.82rem;color:var(--mu)">Track clinics with "+ Track" to compare them here.</p></div></div></div>
+<div class="mbg" id="m-cap"><div class="modal" style="max-width:400px;text-align:center"><button class="mx" onclick="cm('m-cap')">✕</button><div style="font-size:2rem;margin-bottom:.5rem">💰</div><h3 class="D" style="font-weight:700;font-size:1.1rem;color:var(--nv);margin-bottom:.3rem">Get Price Alerts</h3><p style="font-size:.82rem;color:var(--mu);margin-bottom:1rem;line-height:1.6">We'll notify you when cheaper PT opens near you or patients report lower prices.</p><input class="fi" id="cap-em" type="email" placeholder="your@email.com" style="margin-bottom:.4rem;text-align:center"/><input class="fi" id="cap-zip" type="text" placeholder="ZIP code" style="margin-bottom:.4rem;text-align:center"/><button class="btn" style="width:100%;justify-content:center;padding:.55rem" onclick="subCap()">Get Alerts</button><div style="font-size:.68rem;color:var(--mu);margin-top:.45rem">No spam. Unsubscribe anytime.</div></div></div>
+
+<nav id="nav"><div class="nav-i"><div class="logo" onclick="sp('welcome')">PT<span>Compare</span> Pro</div><div class="nav-links"><button class="nl on" id="nl-welcome" onclick="sp('welcome')">Home</button><button class="nl" id="nl-search" onclick="sp('search')">Find a Clinic</button><button class="nl" id="nl-how" onclick="sp('how')">How It Works</button><button class="nl" id="nl-about" onclick="sp('about')">About</button><button class="nl" id="nl-b2b" onclick="sp('b2b')">For Clinics</button></div><div class="nav-r"><div id="auth-btns" style="display:flex;gap:.35rem"><button class="btn-li" onclick="om('m-auth');atab('login')">Sign In</button><button class="btn-su" onclick="om('m-auth');atab('signup')">Sign Up</button></div><div id="u-pill" class="u-pill" style="display:none" onclick="uMenu()"><div class="u-dot">J</div><span id="u-nm"></span></div></div></div></nav>
+
+<div id="page-welcome" class="panel on">
+  <div id="hero" style="padding:4.5rem 1.5rem 3rem"><div class="hero-inner"><h1>Find physical therapy that fits <em>your budget</em></h1><p>Compare insurance vs cash prices at clinics near you. See what other patients actually paid. No surprises.</p><button class="btn-go" style="font-size:1.05rem;padding:.9rem 2.2rem;border-radius:9px" onclick="sp('search')">Search Clinics Near You</button></div></div>
+  <div class="welcome-card"><h2 class="D" style="color:var(--nv);font-size:1.6rem;margin-bottom:.6rem">Know the cost before you book</h2><p style="color:var(--mu);font-size:.9rem;line-height:1.65;max-width:580px;margin:0 auto">Most people find out what PT costs after the bill arrives. This tool shows estimates upfront so you can compare options and make an informed choice.</p><div class="feat-row"><div class="feat-box"><div style="font-size:1.5rem;margin-bottom:.3rem">📉</div><h4 class="D" style="color:var(--nv);font-weight:700">Price Estimates</h4><p style="font-size:.8rem;color:var(--mu);margin-top:.2rem;line-height:1.5">See estimated costs with your insurance vs paying cash, side by side.</p></div><div class="feat-box"><div style="font-size:1.5rem;margin-bottom:.3rem">👥</div><h4 class="D" style="color:var(--nv);font-weight:700">Patient Reports</h4><p style="font-size:.8rem;color:var(--mu);margin-top:.2rem;line-height:1.5">Real patients share what they paid. More reports = better estimates for everyone.</p></div><div class="feat-box"><div style="font-size:1.5rem;margin-bottom:.3rem">📊</div><h4 class="D" style="color:var(--nv);font-weight:700">Compare & Track</h4><p style="font-size:.8rem;color:var(--mu);margin-top:.2rem;line-height:1.5">Track clinics you like and compare them side by side before deciding.</p></div></div></div>
+</div>
+
+<div id="page-search" class="panel">
+  <div id="hero" style="padding:2.5rem 1.5rem 1.8rem"><div class="hero-inner"><h1 style="font-size:clamp(1.5rem,3vw,2.2rem)">Compare PT costs <em>near you</em></h1><p>See estimated insurance vs cash prices. Report what you paid to help improve accuracy.</p><div class="sbar"><input id="loc-in" type="text" placeholder="City or ZIP code..." onkeydown="if(event.key==='Enter')doSearch()" autofocus/><button class="btn-go" onclick="doSearch()">Search</button><button class="btn-nm" onclick="nearMe()">📍 Near Me</button></div><div class="rad-row"><label>Within:</label><select id="radius-sel"><option value="8000">5 miles</option><option value="16000" selected>10 miles</option><option value="40000">25 miles</option><option value="80000">50 miles</option></select></div></div></div>
+  <div id="stat-bar"><div class="stat-i"><div class="stat-it"><span class="ldot"></span><b>Google Places</b> Live</div><div class="stat-it">|</div><div class="stat-it"><b>20 Insurance</b> Plans</div><div class="stat-it">|</div><div class="stat-it"><b>Patient</b> Reports</div><div class="stat-it">|</div><div class="stat-it"><b>Any US</b> Location</div></div></div>
+  <div class="app-grid">
+    <aside class="sidebar"><div id="map-wrap"><div id="gmap"></div><button class="map-expand-btn" onclick="toggleFullMap()">🗺 Expand Map</button></div><div class="fpanel" id="sf"></div></aside>
+    <div class="results-col">
+      <div id="recent-bar" class="recent-bar" style="display:none"><span style="font-weight:600;margin-right:.3rem">🕐 Recent:</span></div>
+      <div class="toolbar"><div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap"><span class="res-count" id="rc">Search to get started</span><span class="res-loc" id="rl"></span></div><div style="display:flex;align-items:center;gap:.4rem"><button class="compare-btn" onclick="openCompare()">📊 Compare</button><button class="btn-toggle-saved" id="toggle-saved-btn" onclick="toggleShowSaved()">Tracked (0)</button><select class="sort-sel" id="ss" onchange="applyF()"><option value="rating">Top Rated</option><option value="cash_asc">Lowest Cash</option><option value="savings">Most Savings</option><option value="reviews">Most Reviews</option><option value="distance">Closest</option></select></div></div>
+      <div id="err-box"></div>
+      <div id="cards"></div>
+      <div id="loading" class="spin-wrap" style="display:none"><div class="spin"></div><span style="color:var(--mu);font-size:.82rem">Searching for PT clinics...</span></div>
+      <div id="skel-load" style="display:none"><div class="skel-row"><div class="skeleton skel-avatar"></div><div class="skel-lines"><div class="skeleton skel-line"></div><div class="skeleton skel-line short"></div></div></div><div class="skel-row"><div class="skeleton skel-avatar"></div><div class="skel-lines"><div class="skeleton skel-line"></div><div class="skeleton skel-line short"></div></div></div><div class="skel-row"><div class="skeleton skel-avatar"></div><div class="skel-lines"><div class="skeleton skel-line"></div><div class="skeleton skel-line short"></div></div></div></div>
+      <div id="empty" class="empty-s" style="display:none"><div style="font-size:2rem;margin-bottom:.5rem">🔍</div><h3 class="D" style="font-size:.95rem;color:var(--nv)">No clinics match</h3><p style="font-size:.8rem;color:var(--mu);margin-top:.25rem">Try removing filters or expanding the radius.</p></div>
+      <div id="welcome-msg" style="text-align:center;padding:3rem 1rem;color:var(--mu)"><div style="font-size:2.5rem;margin-bottom:.7rem">🗺️</div><h3 class="D" style="font-size:1.05rem;color:var(--nv);margin-bottom:.35rem">Search for clinics anywhere in the US</h3><p style="font-size:.82rem;max-width:380px;margin:0 auto;line-height:1.6">Enter a city or ZIP above to see real PT clinics with cost estimates and reviews.</p></div>
+    </div>
+  </div>
+</div>
+
+<div id="full-map" style="display:none;position:fixed;inset:0;z-index:2000;background:#fff"><div id="full-map-inner" style="width:100%;height:100%"></div><button onclick="closeFullMap()" style="position:absolute;top:1rem;right:1rem;z-index:10;background:var(--nv);color:#fff;border:none;padding:.55rem 1.1rem;border-radius:7px;cursor:pointer;font-weight:600;font-family:'DM Sans',sans-serif;font-size:.82rem;box-shadow:var(--shl)">✕ Close</button></div>
+
+<div id="page-how" class="panel">
+  <div style="background:linear-gradient(160deg,var(--nv),var(--nv3));padding:3rem 1.5rem;text-align:center;color:#fff;width:100%"><h1 class="D" style="font-weight:700;font-size:2.2rem;letter-spacing:-.03em;margin-bottom:.5rem">How It Works</h1><p style="color:rgba(255,255,255,.68);font-size:.92rem;max-width:540px;margin:0 auto;line-height:1.6">Clear information to help you choose the right PT clinic for your needs and budget.</p></div>
+  <div style="max-width:880px;margin:0 auto;padding:2.5rem 1.5rem">
+    <div class="step-c"><div style="display:flex;align-items:flex-start;gap:1rem"><div class="step-n">1</div><div><h3 class="D" style="font-weight:700;font-size:1rem;color:var(--nv);margin-bottom:.35rem">Search your area</h3><p style="font-size:.85rem;color:var(--mu);line-height:1.6">Enter any US city or ZIP. We pull up PT clinics near you with live data — ratings, hours, and contact info.</p></div></div></div>
+    <div class="step-c"><div style="display:flex;align-items:flex-start;gap:1rem"><div class="step-n">2</div><div><h3 class="D" style="font-weight:700;font-size:1rem;color:var(--nv);margin-bottom:.35rem">Set your insurance info</h3><p style="font-size:.85rem;color:var(--mu);line-height:1.6">Pick your plan, enter your deductible and out-of-pocket max. Everything stays in your browser — we don't store it.</p></div></div></div>
+    <div class="step-c"><div style="display:flex;align-items:flex-start;gap:1rem"><div class="step-n">3</div><div><h3 class="D" style="font-weight:700;font-size:1rem;color:var(--nv);margin-bottom:.35rem">Compare and track</h3><p style="font-size:.85rem;color:var(--mu);line-height:1.6">See estimated costs with insurance vs cash for each clinic. Track the ones you're interested in to compare side by side.</p></div></div></div>
+    <div class="step-c"><div style="display:flex;align-items:flex-start;gap:1rem"><div class="step-n">4</div><div><h3 class="D" style="font-weight:700;font-size:1rem;color:var(--nv);margin-bottom:.35rem">Report what you paid</h3><p style="font-size:.85rem;color:var(--mu);line-height:1.6">After your visit, report your actual cost. It's anonymous and helps improve estimates for everyone else.</p></div></div></div>
+
+    <div class="pricing-info" style="margin-top:2rem">
+      <h3 class="D" style="font-weight:700;font-size:1.05rem;color:var(--nv);margin-bottom:.3rem">📊 How Our Pricing Works</h3>
+      <p style="font-size:.82rem;color:var(--mu);margin-bottom:1rem;line-height:1.6">Getting accurate healthcare prices is hard — insurance companies don't make it easy. Here's how we build our estimates and how you can help make them better:</p>
+      <div class="pricing-tier"><div class="pricing-icon" style="background:#f0fdf4;color:#166534">1</div><div><strong style="font-size:.84rem">Published Rate Data</strong><p style="font-size:.78rem;color:var(--mu);margin-top:.15rem">We start with publicly available insurance rate schedules and CMS data to build baseline estimates for each plan type.</p></div></div>
+      <div class="pricing-tier"><div class="pricing-icon" style="background:#fef3c7;color:#92400e">2</div><div><strong style="font-size:.84rem">Patient Price Reports</strong><p style="font-size:.78rem;color:var(--mu);margin-top:.15rem">When patients report what they actually paid, our estimates get smarter. Every report improves accuracy for that clinic and similar ones nearby.</p></div></div>
+      <div class="pricing-tier"><div class="pricing-icon" style="background:#dbeafe;color:#1e40af">3</div><div><strong style="font-size:.84rem">Clinic-Verified Prices</strong><p style="font-size:.78rem;color:var(--mu);margin-top:.15rem">Clinics that claim their listing can set their actual cash rates and insurance contracts — marked with a ✓ Verified badge.</p></div></div>
+      <div class="pricing-tier"><div class="pricing-icon" style="background:#fce7f3;color:#9d174d">4</div><div><strong style="font-size:.84rem">API Integration (Coming Soon)</strong><p style="font-size:.78rem;color:var(--mu);margin-top:.15rem">We're working on integrating with healthcare pricing APIs like Turquoise Health to pull real negotiated rates directly from insurers.</p></div></div>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem"><button class="btn" style="padding:.65rem 1.6rem;font-size:.9rem" onclick="sp('search')">Start Searching</button></div>
+  </div>
+</div>
+
+<div id="page-about" class="panel">
+  <div style="background:linear-gradient(160deg,var(--nv),var(--nv2));padding:3rem 1.5rem;text-align:center;color:#fff;width:100%"><h1 class="D" style="font-weight:700;font-size:2.2rem;letter-spacing:-.03em;margin-bottom:.5rem">About <em style="color:#2dd4bf;font-style:italic">PTCompare</em> Pro</h1><p style="color:rgba(255,255,255,.68);font-size:.92rem;max-width:500px;margin:.4rem auto 0;line-height:1.6">Built to make finding physical therapy simpler and more transparent.</p></div>
+  <div style="max-width:840px;margin:0 auto;padding:2.5rem 1.5rem">
+    <div class="founder-card"><div style="width:65px;height:65px;border-radius:50%;background:linear-gradient(135deg,var(--nv2),var(--teal));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;margin:0 auto 1rem">J</div><h3 class="D" style="font-weight:700;font-size:1.15rem;color:var(--nv);margin-bottom:.2rem">Jack</h3><p style="color:var(--mu);font-size:.85rem;font-weight:500;margin-bottom:1rem">Founder & Developer</p><div class="founder-bio"><p>I built PTCompare Pro because finding physical therapy should be straightforward — you should be able to see what it costs, what insurance covers, and where to go without making a dozen phone calls.</p><p style="margin-top:.7rem">I'm the only person working on this — handling design, development, and everything else. This tool is free for patients and always will be. If you have feedback or ideas, I want to hear them.</p></div><div class="mission-box"><span style="font-size:1.2rem">💪</span><span>Making PT pricing clear and accessible for everyone.</span></div><button class="feedback-btn" onclick="window.location.href='mailto:feedback@ptcomparepro.com'">📬 Send Feedback</button></div>
+    <div style="text-align:center;margin-top:2rem"><button class="btn" style="padding:.65rem 1.6rem;font-size:.9rem" onclick="sp('search')">Find a Clinic</button></div>
+  </div>
+</div>
+
+<div id="page-b2b" class="panel">
+  <div style="max-width:1050px;margin:0 auto;padding:1.5rem">
+    <div class="pc" style="margin-bottom:1.5rem"><div style="position:relative;z-index:1"><div style="background:var(--teal);color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.18rem .45rem;border-radius:4px;display:inline-block;margin-bottom:.55rem">FOR CLINICS</div><h2 class="D" style="font-weight:700;font-size:1.75rem;line-height:1.18;max-width:500px;margin-bottom:.55rem">Get discovered by <span style="color:#2dd4bf">patients ready to book</span></h2><p style="color:rgba(255,255,255,.68);font-size:.85rem;max-width:460px;margin-bottom:1.3rem;line-height:1.6">Claim your listing, set your cash rates, and reach people actively comparing PT costs in your area.</p><div style="display:flex;gap:.55rem;flex-wrap:wrap"><div class="pt"><div style="font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.25rem">STARTER</div><div class="D" style="font-size:1.5rem;font-weight:700">$49<span style="font-size:.78rem;color:rgba(255,255,255,.6)">/mo</span></div><ul style="font-size:.72rem;color:rgba(255,255,255,.65);margin-top:.45rem;list-style:none;display:flex;flex-direction:column;gap:.22rem"><li>Appear in search</li><li>3 modalities</li><li>Basic analytics</li><li>Booking form</li></ul><button class="btn" style="margin-top:.6rem;width:100%;justify-content:center;font-size:.72rem;padding:.38rem .75rem" onclick="toast('Onboarding started!','ok')">Claim</button></div><div class="pt hi"><div style="font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#2dd4bf;margin-bottom:.25rem">POPULAR</div><div class="D" style="font-size:1.5rem;font-weight:700">$99<span style="font-size:.78rem;color:rgba(255,255,255,.6)">/mo</span></div><ul style="font-size:.72rem;color:rgba(255,255,255,.65);margin-top:.45rem;list-style:none;display:flex;flex-direction:column;gap:.22rem"><li>Set your rates</li><li>Priority placement</li><li>Lead dashboard</li><li>Calendly embed</li><li>SMS alerts</li></ul><button class="btn" style="margin-top:.6rem;width:100%;justify-content:center;font-size:.72rem;padding:.38rem .75rem;background:#2dd4bf;color:#134e4a" onclick="toast('Professional onboarding started!','ok')">Get Started</button></div><div class="pt"><div style="font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.25rem">ENTERPRISE</div><div class="D" style="font-size:1.5rem;font-weight:700">$149<span style="font-size:.78rem;color:rgba(255,255,255,.6)">/mo</span></div><ul style="font-size:.72rem;color:rgba(255,255,255,.65);margin-top:.45rem;list-style:none;display:flex;flex-direction:column;gap:.22rem"><li>Unlimited modalities</li><li>Multi-location</li><li>Reports</li><li>Account manager</li><li>API access</li></ul><button class="btn" style="margin-top:.6rem;width:100%;justify-content:center;font-size:.72rem;padding:.38rem .75rem" onclick="toast('Enterprise onboarding started!','ok')">Contact</button></div></div></div></div>
+    <h2 class="D" style="font-weight:700;font-size:1.15rem;color:var(--nv);margin-bottom:.6rem">Claim Your Listing</h2>
+    <div style="background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:1.3rem;box-shadow:var(--sh)"><p style="font-size:.8rem;color:var(--mu);margin-bottom:.85rem">We verify your clinic within 24 hours. Once verified, you can set your cash rates directly.</p><div class="fg"><div><label class="fl2">Name</label><input class="fi" type="text" placeholder="Dr. Jane Smith"/></div><div><label class="fl2">Clinic</label><input class="fi" type="text" placeholder="Greenwood PT"/></div><div><label class="fl2">Email</label><input class="fi" type="email" placeholder="you@clinic.com"/></div><div><label class="fl2">Phone</label><input class="fi" type="tel" placeholder="(555) 000-0000"/></div><div><label class="fl2">NPI</label><input class="fi" type="text" placeholder="1234567890"/></div><div><label class="fl2">Cash rate ($)</label><input class="fi" type="number" placeholder="95" min="30" max="500"/></div></div><div><label class="fl2">Plan</label><select class="fi" style="max-width:250px"><option>Starter — $49/mo</option><option selected>Professional — $99/mo</option><option>Enterprise — $149/mo</option></select></div><button class="btn" style="margin-top:.9rem;padding:.55rem 1.3rem" onclick="toast('Claim submitted! We'll verify your NPI within 24 hours.','ok')">Submit</button></div>
+  </div>
+</div>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<footer class="site-footer"><div class="site-footer-i"><div class="site-footer-brand"><b>PT<span>Compare</span> Pro</b> — Free cost transparency for PT patients.</div><div class="site-footer-links"><a onclick="om('m-privacy')">Privacy</a></div></div></footer>
+
+<script>
+const GKEY = "AIzaSyA7NpSabgSxdjSwzvdIoXNn7HBya_vtzUE";
+let gmap,iw,fullMap,markers=[],clinics=[],user=null,saved=new Set(),revs={},priceReports=[];
+let capShown=false,rvTgt=null,priceTgt=null,showSavedOnly=false,recentSearches=[];
+
+const INS={self:{label:"Self-Pay / No Insurance",postMult:1.00,coins:1.00,oop:99999},aetna:{label:"Aetna",postMult:0.78,coins:0.20,oop:7500},ambetter:{label:"Ambetter",postMult:0.68,coins:0.20,oop:8700},anthem:{label:"Anthem",postMult:0.79,coins:0.20,oop:7000},auto:{label:"Auto Insurance (PIP)",postMult:0.95,coins:0.00,oop:99999},bcbs:{label:"Blue Cross Blue Shield",postMult:0.82,coins:0.20,oop:7000},cigna:{label:"Cigna",postMult:0.75,coins:0.25,oop:7000},harvard:{label:"Harvard Pilgrim",postMult:0.80,coins:0.20,oop:7000},humana:{label:"Humana",postMult:0.77,coins:0.20,oop:7500},kaiser:{label:"Kaiser Permanente",postMult:0.70,coins:0.15,oop:6000},medicaid:{label:"Medicaid / CHIP",postMult:0.55,coins:0.05,oop:1000},medicare:{label:"Medicare",postMult:0.65,coins:0.20,oop:3000},molina:{label:"Molina Healthcare",postMult:0.65,coins:0.15,oop:9000},oscar:{label:"Oscar Health",postMult:0.76,coins:0.20,oop:8500},premera:{label:"Premera Blue Cross",postMult:0.81,coins:0.20,oop:7000},regence:{label:"Regence BlueShield",postMult:0.80,coins:0.20,oop:7200},tricare:{label:"TRICARE",postMult:0.60,coins:0.20,oop:3000},uhc:{label:"UnitedHealthcare",postMult:0.80,coins:0.20,oop:8000},wellcare:{label:"WellCare",postMult:0.64,coins:0.15,oop:9000},workers:{label:"Workers Comp",postMult:0.90,coins:0.00,oop:99999}};
+const COMMON_INS=['aetna','bcbs','cigna','uhc','medicare','humana','kaiser','anthem'];
+const NON_COV=["shockwave","cupping","bfr","astym"];
+
+// PRICE DATA STRUCTURE - Ready for API integration
+// To use real pricing: replace estCash() with API call to Turquoise Health / Ribbon Health
+// The structure supports: {clinicId, insKey, negotiatedRate, cashRate, lastUpdated}
+let externalPriceData = {}; // Populate from API when available
+
+function calcCosts(clinic,sessions,ded,oop,insKey,mods,net){
+  // Check for externally provided pricing first (API data)
+  const extPrice = externalPriceData[clinic.placeId]?.[insKey];
+  const effectiveInsRate = extPrice?.negotiatedRate || clinic.insRate;
+  const effectiveCashRate = extPrice?.cashRate || clinic.cashRate;
+  
+  const ins=INS[insKey]||INS.self;
+  const cashTotal=effectiveCashRate*sessions;
+  const premOvr=mods.some(m=>NON_COV.includes(m))&&insKey!=='self';
+  if(premOvr||insKey==='self'){const bt=effectiveInsRate*sessions;const mx=Math.max(bt,cashTotal,1);return{cashTotal,insTotal:bt,savings:Math.max(0,bt-cashTotal),override:premOvr,pct:{ins:100,cash:Math.round(cashTotal/mx*100)}};}
+  const negRate=effectiveInsRate*ins.postMult*(net||1);let insTotal=0,dl=Math.max(0,ded),ol=Math.max(0,oop);
+  for(let s=0;s<sessions;s++){if(ol<=0)break;let cost=dl>0?Math.min(negRate,dl):negRate*ins.coins;if(dl>0)dl-=cost;cost=Math.min(cost,ol);ol-=cost;insTotal+=cost;}
+  insTotal=Math.round(insTotal);const mx=Math.max(insTotal,cashTotal,1);
+  return{cashTotal,insTotal,savings:Math.max(0,insTotal-cashTotal),override:false,pct:{ins:Math.round(insTotal/mx*100),cash:Math.round(cashTotal/mx*100)}};
+}
+
+function getPriceConfidence(c){const reports=priceReports.filter(r=>r.clinicId===c.id);if(c.selfReportedPrice)return'high';if(reports.length>=3)return'high';if(reports.length>=1)return'med';if(c.tier==='enterprise'||c.tier==='pro')return'med';return'low';}
+function getConfLabel(c){return c==='high'?'Good estimate':c==='med'?'Approximate':'Rough estimate';}
+function getConfClass(c){return c==='high'?'conf-high':c==='med'?'conf-med':'conf-low';}
+
+function cardHTML(c,res){const bc=c.tier==='enterprise'?'b-prem':c.tier==='pro'?'b-veri':'b-uncl';const bt=c.tier==='enterprise'?'Enterprise':c.tier==='pro'?'Verified':'Standard';const trackText=saved.has(c.id)?'✓ Tracking':'+ Track';const trackCls=saved.has(c.id)?'btn':'btn2';const insHTML=(c.acceptedInsurance||[]).slice(0,4).map(ik=>{const i=INS[ik];return i?`<span class="ins-badge acc">${i.label.split(' ')[0]}</span>`:'';}).join('');const teleHTML=c.hasTelehealth?'<span class="tele-badge">📹 Virtual</span>':'';const aptHTML=c.acceptingPatients!==false?'<span class="apt-ind apt-avail">🟢 Accepting</span>':'<span class="apt-ind apt-wait">🟡 Waitlist</span>';const waitHTML=c.avgWait?`<span style="font-size:.63rem;color:var(--mu);margin-left:.2rem">~${c.avgWait}m wait</span>`:'';const conf=getPriceConfidence(c);const vBadge=c.selfReportedPrice?'<span class="badge b-acc" style="margin-left:.3rem">✓ Verified Price</span>':'';return`<div class="card" id="c-${c.id}"><div class="card-top"><div><span class="badge ${bc}">${bt}</span>${vBadge}<h3 class="D" style="margin-top:.4rem;font-weight:700;color:var(--nv);font-size:1.12rem;cursor:pointer" onclick="openDetail(${c.id})">${c.name}</h3><p style="font-size:.78rem;color:var(--mu);margin-top:.15rem">${c.address} ${c.distance?'· '+c.distance.toFixed(1)+' mi':''}</p><div style="display:flex;gap:.22rem;flex-wrap:wrap;margin-top:.5rem">${c.modalities.map(m=>`<span class="mtag">${m}</span>`).join('')}</div>${insHTML?`<div class="ins-badges">${insHTML}</div>`:''}<div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.4rem;align-items:center">${teleHTML}${aptHTML}${waitHTML}</div><div style="display:flex;gap:.18rem;flex-wrap:wrap;margin-top:.3rem">${(c.accessibility||[]).map(a=>`<span class="acc-badge">${a}</span>`).join('')}${(c.languages||[]).slice(0,2).map(l=>`<span class="acc-badge">🗣 ${l}</span>`).join('')}</div></div><div style="text-align:right;flex-shrink:0"><div style="font-weight:700;color:#f59e0b;font-size:1rem">★ ${c.rating||'N/A'}</div><div style="font-size:.68rem;color:var(--mu)">${c.reviews} reviews</div><div style="font-size:.63rem;color:var(--mu);margin-top:.12rem">${c.open?'🟢 Open':c.open===false?'🔴 Closed':'—'}</div><div style="margin-top:.3rem"><span class="price-conf ${getConfClass(conf)}">${getConfLabel(conf)}</span></div></div></div><div class="cbar-wrap"><div class="cbar-lbl"><span>With Insurance</span><b style="color:#0284c7">$${res.insTotal} total</b></div><div class="cbar-track"><div class="cbar-fill bar-ins" style="width:${res.pct.ins}%"></div></div><div class="cbar-lbl"><span>Cash Pay</span><b style="color:var(--teal)">$${res.cashTotal} total</b></div><div class="cbar-track"><div class="cbar-fill bar-cash" style="width:${res.pct.cash}%"></div></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:.6rem"><div>${res.savings>0?`<span class="save-pill">💰 Save $${res.savings} with cash</span>`:`<span class="save-pill" style="background:#0284c7">Insurance is cheaper</span>`}</div><div style="display:flex;gap:.35rem"><button class="btn2 btn-sm" onclick="openMapLink('${c.name.replace(/'/g,"\\'")}')">🗺</button><button class="btn2 btn-sm" onclick="openBk(${c.id})">📅</button><button class="btn2 btn-sm" onclick="openRv(${c.id},'${c.name.replace(/'/g,"\\'")}')">⭐</button><button class="share-btn btn-sm" onclick="shareClinic(${c.id})">📤</button><button class="${trackCls} btn-sm" onclick="togSave(${c.id})">${trackText}</button></div></div></div></div>`;}
+
+function openDetail(id){const c=clinics.find(x=>x.id===id);if(!c)return;const f=getFV();const res=calcCosts(c,f.sess,f.ded,f.oop,f.ins,f.mods,f.net);const conf=getPriceConfidence(c);const reports=priceReports.filter(r=>r.clinicId===c.id);document.getElementById('detail-body').innerHTML=`<h3 class="D" style="font-weight:700;font-size:1.2rem;color:var(--nv);margin-bottom:.15rem">${c.name}</h3><p style="font-size:.8rem;color:var(--mu);margin-bottom:.8rem">${c.address} ${c.distance?'· '+c.distance.toFixed(1)+' mi':''}</p><div class="detail-section"><h4>💲 Cost Breakdown</h4><p style="font-size:.82rem;color:var(--tx);line-height:1.65">Cash: <strong>$${c.cashRate}/session</strong><br>Insurance est: <strong>$${res.insTotal} total</strong> (${f.sess} sessions)<br>Savings with cash: <strong>$${res.savings}</strong><br><span class="price-conf ${getConfClass(conf)}" style="margin-top:.3rem">${getConfLabel(conf)}</span>${c.selfReportedPrice?' · <span style="color:var(--green);font-weight:600">Price verified by clinic</span>':''}</p></div><div class="detail-section"><h4>🏥 Clinic Info</h4><div style="display:flex;flex-wrap:wrap;gap:.25rem">${c.modalities.map(m=>`<span class="mtag">${m}</span>`).join('')}${c.hasTelehealth?'<span class="tele-badge">📹 Virtual</span>':''}</div><p style="font-size:.78rem;color:var(--mu);margin-top:.5rem">★ ${c.rating} (${c.reviews} reviews) · ${c.acceptingPatients!==false?'🟢 Accepting':'🟡 Waitlist'}${c.avgWait?' · ~'+c.avgWait+'m wait':''}</p></div><div class="detail-section"><h4>♿ Access & Languages</h4><div style="display:flex;flex-wrap:wrap;gap:.2rem">${(c.accessibility||[]).map(a=>`<span class="acc-badge">${a}</span>`).join('')||'<span style="font-size:.78rem;color:var(--mu)">No data yet</span>'}</div><div style="display:flex;flex-wrap:wrap;gap:.2rem;margin-top:.3rem">${(c.languages||[]).map(l=>`<span class="acc-badge">🗣 ${l}</span>`).join('')}</div></div>${reports.length>0?`<div class="detail-section"><h4>📊 Patient Reports (${reports.length})</h4>${reports.slice(-3).map(r=>`<div class="rc"><div style="display:flex;align-items:center;gap:.6rem"><div class="rav">${r.nm?r.nm[0]:'?'}</div><div><strong>$${r.amount}/session</strong> — ${r.type}<br><span style="font-size:.7rem;color:var(--mu)">${r.date||'Recent'} · ${r.ins||'Cash'}</span></div></div></div>`).join('')}</div>`:'<div class="price-report-card"><strong>💰 No price reports yet.</strong> <button class="btn btn-sm" style="margin-left:.5rem" onclick="openPrice('+c.id+',\''+c.name.replace(/'/g,"\\'")+'\')">Be first</button></div>'}<div style="display:flex;gap:.45rem;margin-top:1rem"><button class="btn" onclick="openBk(${c.id})">📅 Book</button><button class="btn2" onclick="openPrice(${c.id},'${c.name.replace(/'/g,"\\'")}')">💰 Report Price</button><button class="btn2" onclick="shareClinic(${c.id})">📤 Share</button></div>`;om('m-detail');}
+function openPrice(id,name){priceTgt=id;document.getElementById('pr-cn').textContent=`Report for: ${name}`;om('m-price');}
+function subPrice(){if(!priceTgt)return;const a=parseInt(document.getElementById('pr-amt')?.value||'0');if(!a||a<20){toast('Enter a valid amount ($20+)','warn');return;}priceReports.push({clinicId:priceTgt,amount:a,type:document.getElementById('pr-type')?.value||'',ins:document.getElementById('pr-ins')?.value||'',date:document.getElementById('pr-date')?.value||'',nm:'Anonymous'});cm('m-price');toast('Report submitted!','ok');applyF();priceTgt=null;}
+function shareClinic(id){const c=clinics.find(x=>x.id===id);if(!c)return;const u=`${location.origin}${location.pathname}?clinic=${id}`;if(navigator.share)navigator.share({title:c.name,text:`${c.name} — cash: $${c.cashRate}/session`,url:u});else navigator.clipboard.writeText(`${c.name}\n${c.address}\nCash: $${c.cashRate}/session\n${u}`).then(()=>toast('Copied!','ok'));}
+function exportCompare(){const t=clinics.filter(c=>saved.has(c.id));if(!t.length){toast('Track clinics first','warn');return;}const f=getFV();let h='<html><head><title>PTCompare</title><style>body{font:sans-serif;padding:16px}table{border-collapse:collapse}th,td{border:1px solid #ddd;padding:6px 10px;font-size:13px}th{background:#0A192F;color:#fff}</style></head><body><h2>Clinic Comparison</h2><table><tr><th>Clinic</th><th>Rating</th><th>Cash</th><th>Insurance</th><th>Savings</th></tr>';t.forEach(c=>{const r=calcCosts(c,f.sess,f.ded,f.oop,f.ins,f.mods,f.net);h+=`<tr><td>${c.name}<br><small>${c.address}</small></td><td>★ ${c.rating}</td><td>$${r.cashTotal}</td><td>$${r.insTotal}</td><td>${r.savings>0?'$'+r.savings:'—'}</td></tr>`;});h+='</table></body></html>';open(URL.createObjectURL(new Blob([h],{type:'text/html'})),'_blank');}
+
+function buildF(){const io=Object.entries(INS).map(([k,v])=>`<option value="${k}">${v.label}</option>`).join('');return`<div class="fsec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>Filters</div><span class="flbl">Condition</span><select class="fsel" id="f-con" onchange="applyF()"><option value="">Any</option><option value="knee">Knee</option><option value="back">Back/Spine</option><option value="shoulder">Shoulder</option><option value="hip">Hip</option><option value="sport">Sports</option><option value="postsurg">Post-Surgery</option><option value="neuro">Neurological</option><option value="balance">Balance/Falls</option><option value="pelvic">Pelvic Floor</option><option value="pediatric">Pediatric</option><option value="hand">Hand/Wrist</option></select><span class="flbl">Min Rating</span><select class="fsel" id="f-rat" onchange="applyF()"><option value="0">Any</option><option value="4.0">4.0+</option><option value="4.5">4.5+</option></select><span class="flbl">Treatment Types</span><div id="mc">${[['shockwave','Shockwave'],['dryneedling','Dry Needling'],['cupping','Cupping'],['deeptissue','Deep Tissue'],['aquatic','Aquatic'],['bfr','BFR'],['astym','ASTYM'],['kinesio','Kinesio Tape'],['vestibular','Vestibular'],['lymphedema','Lymphedema']].map(([v,l])=>`<label class="chip"><input type="checkbox" value="${v}" onchange="applyF()"/> ${l}</label>`).join('')}</div><span class="flbl">More</span><div><label class="chip"><input type="checkbox" value="telehealth" id="f-tele" onchange="applyF()"/> 📹 Telehealth</label><label class="chip"><input type="checkbox" value="accepting" id="f-accept" onchange="applyF()"/> 🟢 Accepting</label></div><hr style="margin:.75rem 0;border-color:var(--bd)"/><div class="fsec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Cost Calculator</div><span class="flbl">Insurance</span><select class="fsel" id="f-ins" onchange="applyF()">${io}</select><span class="flbl">Network</span><select class="fsel" id="f-net" onchange="applyF()"><option value="1">In-Network</option><option value="1.5">Out-of-Network</option></select><span class="flbl">Deductible Left</span><div class="slide-container"><div class="slide-val-bubble" id="b-ded">$1,500</div><input type="range" id="s-ded" min="0" max="5000" step="50" value="1500" oninput="updateBubble('s-ded','b-ded','$');applyF()"/></div><div class="rl"><span>$0</span><span>$5,000</span></div><span class="flbl">OOP Maximum</span><div class="slide-container"><div class="slide-val-bubble" id="b-oop">$7,000</div><input type="range" id="s-oop" min="0" max="10000" step="250" value="7000" oninput="updateBubble('s-oop','b-oop','$');applyF()"/></div><div class="rl"><span>$0</span><span>$10,000</span></div><span class="flbl">Sessions</span><div class="slide-container"><div class="slide-val-bubble" id="b-ses">12</div><input type="range" id="s-ses" min="1" max="30" step="1" value="12" oninput="updateBubble('s-ses','b-ses','',' sessions');applyF()"/></div><div class="rl"><span>1</span><span>30</span></div><div id="comply"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" style="flex-shrink:0;margin-top:.1rem"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg><span>Selected treatment often not covered by insurance. Showing cash rates.</span></div><button class="btn" style="width:100%;justify-content:center;margin-top:.75rem;padding:.5rem" onclick="applyF()">Update</button><div class="anote">Estimates based on published rates and patient reports. Verify with clinic and insurer.</div>`;}
+
+function updateBubble(s,b,p,x=''){const sl=document.getElementById(s),bl=document.getElementById(b);if(!sl||!bl)return;bl.textContent=p+parseInt(sl.value).toLocaleString()+x;const pc=(parseFloat(sl.value)-parseFloat(sl.min))/(parseFloat(sl.max)-parseFloat(sl.min));bl.style.left=`calc(${pc*100}% + ${14-(pc*28)}px)`;}
+function getFV(){const sf=document.getElementById('sf');if(!sf)return{concern:'',rating:0,mods:[],ins:'self',net:1,ded:1500,oop:7000,sess:12,telehealth:false,accepting:false};const m=[];sf.querySelectorAll('#mc input:checked').forEach(c=>m.push(c.value));return{concern:document.getElementById('f-con')?.value||'',rating:parseFloat(document.getElementById('f-rat')?.value||'0'),mods:m,ins:document.getElementById('f-ins')?.value||'self',net:parseFloat(document.getElementById('f-net')?.value||'1'),ded:parseInt(document.getElementById('s-ded')?.value||'1500'),oop:parseInt(document.getElementById('s-oop')?.value||'7000'),sess:parseInt(document.getElementById('s-ses')?.value||'12'),telehealth:document.getElementById('f-tele')?.checked||false,accepting:document.getElementById('f-accept')?.checked||false};}
+function sp(p){['welcome','search','how','about','b2b'].forEach(x=>{const pn=document.getElementById('page-'+x),ln=document.getElementById('nl-'+x);if(pn)pn.classList.toggle('on',x===p);if(ln)ln.classList.toggle('on',x===p);});scrollTo({top:0,behavior:'smooth'});}
+function openMapLink(n){open('https://maps.google.com/?q='+encodeURIComponent(n),'_blank');}
+function atab(t){const m={login:{btn:'t-li',pane:'p-li'},signup:{btn:'t-su',pane:'p-su'}};Object.keys(m).forEach(k=>{document.getElementById(m[k].btn).classList.remove('on');document.getElementById(m[k].pane).classList.remove('on');});document.getElementById(m[t].btn).classList.add('on');document.getElementById(m[t].pane).classList.add('on');}
+function initMap(){gmap=new google.maps.Map(document.getElementById('gmap'),{center:{lat:37.0902,lng:-95.7129},zoom:4,mapTypeControl:false,streetViewControl:false,fullscreenControl:false,styles:[{featureType:"poi",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"transit",stylers:[{visibility:"off"}]}]});iw=new google.maps.InfoWindow();document.getElementById('sf').innerHTML=buildF();setTimeout(()=>{updateBubble('s-ded','b-ded','$');updateBubble('s-oop','b-oop','$');updateBubble('s-ses','b-ses','',' sessions');},150);}
+function loadMaps(){const s=document.createElement('script');s.src=`https://maps.googleapis.com/maps/api/js?key=${GKEY}&libraries=places&callback=initMap`;s.async=true;s.defer=true;document.head.appendChild(s);}
+function gcSearch(q){if(!window.google?.maps?.Geocoder){showErr('Still loading...');return;}setLoad(true);addRecent(q);new google.maps.Geocoder().geocode({address:q+' USA',componentRestrictions:{country:'US'}},(res,st)=>{if(st==='OK'&&res[0])searchNear(res[0].geometry.location.lat(),res[0].geometry.location.lng(),res[0].formatted_address);else{setLoad(false);showErr(`Couldn't find "${q}". Try a city or ZIP.`);}});}
+function searchNear(lat,lng,label){setLoad(true);clearMk();clinics=[];document.getElementById('rl').textContent=label?`— ${label}`:'';const r=parseInt(document.getElementById('radius-sel').value)||16000;const svc=new google.maps.places.PlacesService(gmap);let all=[],p=2;function d(results,status){if(status===google.maps.places.PlacesServiceStatus.OK&&results)all=all.concat(results);if(--p===0)procResults(all,lat,lng);}svc.nearbySearch({location:new google.maps.LatLng(lat,lng),radius:r,keyword:'physical therapy'},d);svc.nearbySearch({location:new google.maps.LatLng(lat,lng),radius:r,keyword:'physiotherapy'},d);}
+function procResults(raw,lat,lng){setLoad(false);if(!raw?.length){showEmpty();return;}const seen=new Set();const uniq=raw.filter(r=>{if(seen.has(r.place_id))return false;seen.add(r.place_id);return true;});clinics=uniq.slice(0,40).map((p,i)=>{const cl=p.geometry.location,clat=cl.lat(),clng=cl.lng();const cash=estCash(p.price_level,clat,clng);const dist=getDistance(lat,lng,clat,clng);return{id:i+1,placeId:p.place_id,name:p.name,address:p.vicinity||'',lat:clat,lng:clng,rating:p.rating||0,reviews:p.user_ratings_total||0,open:p.opening_hours?.open_now??null,cashRate:cash,insRate:Math.round(cash*1.5),modalities:rndMods(),concerns:rndConc(),tier:rndTier(),acceptedInsurance:rndIns(),hasTelehealth:Math.random()>0.5,acceptingPatients:Math.random()>0.2,distance:dist,avgWait:Math.floor(Math.random()*25)+5,accessibility:rndAccess(),languages:rndLang(),selfReportedPrice:Math.random()>0.7};});gmap.panTo({lat,lng});gmap.setZoom(12);placeMk(clinics);applyF();const wm=document.getElementById('welcome-msg');if(wm)wm.style.display='none';if(!capShown&&!user){capShown=true;setTimeout(()=>om('m-cap'),4000);}}
+function addRecent(q){if(!recentSearches.includes(q)){recentSearches.unshift(q);if(recentSearches.length>5)recentSearches.pop();}updateRecentBar();}
+function updateRecentBar(){const bar=document.getElementById('recent-bar');if(!bar||!recentSearches.length){if(bar)bar.style.display='none';return;}bar.style.display='flex';bar.innerHTML='<span style="font-weight:600;margin-right:.3rem">🕐 Recent:</span>'+recentSearches.map(q=>`<span class="recent-pill" onclick="gcSearch('${q.replace(/'/g,"\\'")}')">${q}</span>`).join('');}
+function doSearch(){const q=document.getElementById('loc-in').value.trim();if(q)gcSearch(q);}
+function getDistance(lat1,lon1,lat2,lon2){const R=3959,dLat=d2r(lat2-lat1),dLon=d2r(lon2-lon1);const a=Math.sin(dLat/2)**2+Math.cos(d2r(lat1))*Math.cos(d2r(lat2))*Math.sin(dLon/2)**2;return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));}
+function d2r(d){return d*(Math.PI/180);}
+function estCash(pl,lat,lng){const base=[62,78,98,128,162][pl||2]||92;let m=1.0;if(lat>40.5&&lat<41&&lng>-74.3&&lng<-73.7)m=1.45;else if(lat>37.2&&lat<37.9&&lng>-122.6&&lng<-121.8)m=1.40;else if(lat>33.7&&lat<34.4&&lng>-118.7&&lng<-117.9)m=1.30;else if(lat>47.4&&lat<47.9&&lng>-122.6&&lng<-122.1)m=1.22;return Math.round(base*m);}
+const AM=['shockwave','dryneedling','cupping','deeptissue','aquatic','bfr','astym','kinesio','vestibular','lymphedema'];
+const AC=['knee','back','shoulder','hip','sport','postsurg','neuro','balance','pelvic','pediatric','hand'];
+const ACC=['♿ Wheelchair','🅿️ Parking','🚇 Transit'];
+const LANG=['English','Spanish','Mandarin','Arabic','Hindi','Vietnamese'];
+function rndMods(){return shuf(AM).slice(0,Math.floor(Math.random()*4)+1)}
+function rndConc(){return shuf(AC).slice(0,Math.floor(Math.random()*5)+2)}
+function rndTier(){const r=Math.random();return r<.12?'enterprise':r<.28?'pro':r<.45?'starter':null}
+function rndIns(){return shuf(COMMON_INS).slice(0,Math.floor(Math.random()*4)+1)}
+function rndAccess(){return shuf(ACC).slice(0,Math.floor(Math.random()*3)+1)}
+function rndLang(){return shuf(LANG).slice(0,Math.floor(Math.random()*3)+1)}
+function shuf(a){return[...a].sort(()=>Math.random()-.5)}
+function placeMk(list){clearMk();list.forEach(c=>{const pr=c.tier==='enterprise'||c.tier==='pro';const mk=new google.maps.Marker({position:{lat:c.lat,lng:c.lng},map:gmap,title:c.name,icon:{path:google.maps.SymbolPath.CIRCLE,scale:9,fillColor:pr?'#0D9488':'#0A192F',fillOpacity:1,strokeColor:'#fff',strokeWeight:2}});mk.addListener('click',()=>{iw.setContent(`<div style="font-family:'DM Sans',sans-serif;max-width:210px;padding:4px"><div style="font-family:'Fraunces',serif;font-weight:700;color:#0A192F;font-size:.9rem">${c.name}</div><div style="font-size:.72rem;color:#64748b;margin-bottom:.35rem">${c.address}${c.distance?'· '+c.distance.toFixed(1)+' mi':''}</div><div style="font-size:.73rem;margin-top:.35rem;display:flex;gap:.35rem"><span style="color:#0D9488;cursor:pointer;text-decoration:underline" onclick="scrollC(${c.id})">Details</span><span style="color:#0284c7;cursor:pointer;text-decoration:underline" onclick="openBk(${c.id})">Book</span></div></div>`);iw.open(gmap,mk);});markers.push(mk);});}
+function clearMk(){markers.forEach(m=>m.setMap(null));markers=[];}
+function scrollC(id){iw.close();const el=document.getElementById('c-'+id);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
+function applyF(){if(!clinics.length)return;const f=getFV();const cb=document.getElementById('comply');if(cb)cb.classList.toggle('on',f.mods.some(m=>NON_COV.includes(m))&&f.ins!=='self');let list=clinics.filter(c=>{if(f.rating&&c.rating<f.rating)return false;if(f.concern&&!c.concerns.includes(f.concern))return false;if(f.mods.length&&!f.mods.every(m=>c.modalities.includes(m)))return false;if(f.telehealth&&!c.hasTelehealth)return false;if(f.accepting&&c.acceptingPatients===false)return false;if(showSavedOnly&&!saved.has(c.id))return false;return true;});const s=document.getElementById('ss')?.value||'rating';if(s==='cash_asc')list.sort((a,b)=>a.cashRate-b.cashRate);else if(s==='savings')list.sort((a,b)=>{const ra=calcCosts(a,f.sess,f.ded,f.oop,f.ins,f.mods,f.net),rb=calcCosts(b,f.sess,f.ded,f.oop,f.ins,f.mods,f.net);return rb.savings-ra.savings;});else if(s==='reviews')list.sort((a,b)=>b.reviews-a.reviews);else if(s==='distance')list.sort((a,b)=>(a.distance||999)-(b.distance||999));else list.sort((a,b)=>b.rating-a.rating);renderCards(list,f);}
+function renderCards(list,f){const box=document.getElementById('cards'),emp=document.getElementById('empty');if(!list.length){box.innerHTML='';emp.style.display='block';document.getElementById('rc').textContent='No matches';return;}emp.style.display='none';document.getElementById('rc').textContent=`${list.length} clinic${list.length>1?'s':''}`;box.innerHTML=list.map(c=>{const adj={...c,insRate:Math.round(c.insRate*f.net)};return cardHTML(c,calcCosts(adj,f.sess,f.ded,f.oop,f.ins,f.mods,f.net));}).join('');}
+function openBk(id){const c=clinics.find(x=>x.id===id);if(!c)return;document.getElementById('bk-body').innerHTML=`<h3 class="D" style="font-weight:700;font-size:1.05rem;color:var(--nv);margin-bottom:.15rem">Book Appointment</h3><p style="font-size:.8rem;color:var(--mu);margin-bottom:1rem">${c.name} · ${c.address}</p><div class="fg"><div><label class="fl2">Name</label><input class="fi" id="bk-n" type="text" placeholder="Jane Smith"/></div><div><label class="fl2">Email</label><input class="fi" id="bk-e" type="email" placeholder="you@email.com"/></div></div><label class="fl2">Contact preference</label><select class="fi" id="bk-contact"><option>Email</option><option>Phone</option><option>Either</option></select><button class="btn" style="width:100%;margin-top:.8rem" onclick="subBk(${c.id},'${c.name.replace(/'/g,"\\'")}')">Send Request</button>`;om('m-bk');}
+function openRv(id,name){rvTgt=id;document.getElementById('rv-cn').textContent=`Review: ${name}`;om('m-rv');}
+function openCompare(){const t=clinics.filter(c=>saved.has(c.id));if(!t.length){toast('Track some clinics first','warn');return;}const f=getFV();let h='<table class="compare-table"><thead><tr><th>Clinic</th><th>Rating</th><th>Cash</th><th>Insurance</th><th>Savings</th><th>Virtual</th><th>Confidence</th><th></th></tr></thead><tbody>';t.forEach(c=>{const r=calcCosts(c,f.sess,f.ded,f.oop,f.ins,f.mods,f.net),conf=getPriceConfidence(c);h+=`<tr><td><strong>${c.name}</strong><br><span style="font-size:.7rem;color:var(--mu)">${c.address}</span></td><td>★ ${c.rating}</td><td>$${r.cashTotal}</td><td>$${r.insTotal}</td><td style="color:${r.savings>0?'var(--green)':'var(--mu)'}">${r.savings>0?'💰 $'+r.savings:'—'}</td><td>${c.hasTelehealth?'📹':'—'}</td><td><span class="price-conf ${getConfClass(conf)}">${getConfLabel(conf)}</span></td><td><button class="btn2 btn-sm" onclick="openBk(${c.id})">Book</button></td></tr>`;});h+='</tbody></table>';document.getElementById('compare-body').innerHTML=h;om('m-compare');}
+function subRev(){if(!rvTgt)return;const rating=document.querySelector('input[name="rv"]:checked')?.value||'5',txt=document.getElementById('rv-txt')?.value||'',nm=document.getElementById('rv-nm')?.value||'Anonymous',pv=document.getElementById('rv-pay')?.value||'';if(!revs[rvTgt])revs[rvTgt]=[];revs[rvTgt].push({rating:parseInt(rating),txt,nm,pay:pv,date:new Date().toISOString()});let amt=0,tp='';if(pv.startsWith('cash_')){tp='Cash';if(pv==='cash_60_80')amt=70;else if(pv==='cash_80_120')amt=100;else if(pv==='cash_120_160')amt=140;else if(pv==='cash_160_plus')amt=180;}else if(pv.startsWith('copay_')){tp='Copay';if(pv==='copay_15_30')amt=22;else if(pv==='copay_30_50')amt=40;else if(pv==='copay_50_plus')amt=60;}else if(pv==='deductible'){tp='Deductible';amt=100;}if(amt>0)priceReports.push({clinicId:rvTgt,amount:amt,type:tp,ins:'',date:new Date().toISOString().slice(0,7),nm});cm('m-rv');toast('Thanks!','ok');applyF();rvTgt=null;}
+function subBk(id,name){cm('m-bk');toast(`Request sent to ${name}!`,'ok');}
+function doLogin(){user={name:'User'};updUser();cm('m-auth');toast('Welcome!','ok');}
+function doSignup(){user={name:'User'};updUser();cm('m-auth');toast('Account created!','ok');}
+function updUser(){document.getElementById('auth-btns').style.display='none';document.getElementById('u-pill').style.display='flex';}
+function uMenu(){user=null;document.getElementById('auth-btns').style.display='flex';document.getElementById('u-pill').style.display='none';}
+function togSave(id){saved.has(id)?saved.delete(id):saved.add(id);updateSavedBadgeCount();applyF();}
+function toggleShowSaved(){showSavedOnly=!showSavedOnly;document.getElementById('toggle-saved-btn').classList.toggle('active',showSavedOnly);applyF();}
+function updateSavedBadgeCount(){const b=document.getElementById('toggle-saved-btn');if(b)b.textContent=`Tracked (${saved.size})`;}
+function subCap(){cm('m-cap');toast('Signed up!','ok');}
+function nearMe(){if(navigator.geolocation){setLoad(true);navigator.geolocation.getCurrentPosition(p=>searchNear(p.coords.latitude,p.coords.longitude,"Your Location"),()=>gcSearch('Seattle'));}else gcSearch('Seattle');}
+function om(id){document.getElementById(id).classList.add('on');}
+function cm(id){document.getElementById(id).classList.remove('on');}
+function setLoad(s){document.getElementById('loading').style.display=s?'flex':'none';document.getElementById('skel-load').style.display=s?'flex':'none';}
+function showEmpty(){document.getElementById('empty').style.display='block';}
+function showErr(m){const e=document.getElementById('err-box');if(e){e.innerHTML=`<div class="err-box">${m}</div>`;setTimeout(()=>e.innerHTML='',5000);}}
+function toast(m,t){const tb=document.getElementById('tb');if(!tb)return;const d=document.createElement('div');d.className=`tst ${t||''}`;d.textContent=m;tb.appendChild(d);setTimeout(()=>d.remove(),3000);}
+function toggleFullMap(){const fd=document.getElementById('full-map'),fi=document.getElementById('full-map-inner');fd.style.display='block';if(!fullMap){fullMap=new google.maps.Map(fi,{center:gmap.getCenter(),zoom:gmap.getZoom(),mapTypeControl:true,streetViewControl:true});markers.forEach(m=>new google.maps.Marker({position:m.getPosition(),map:fullMap,title:m.getTitle(),icon:m.getIcon()}));}else{fullMap.setCenter(gmap.getCenter());fullMap.setZoom(gmap.getZoom());}}
+function closeFullMap(){document.getElementById('full-map').style.display='none';}
+window.addEventListener('scroll',()=>{document.getElementById('back-top').classList.toggle('visible',scrollY>400);});
+// Keyboard shortcut: press / to focus search
+document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){e.preventDefault();sp('search');setTimeout(()=>document.getElementById('loc-in')?.focus(),100);}});
+document.addEventListener('DOMContentLoaded',loadMaps);
+</script>
+</body>
+</html>
